@@ -163,7 +163,7 @@ class KaimoPromise {
         return promise2;
     }
 }
-// 规范测试入口
+// promise 延迟对象 规范测试入口
 KaimoPromise.defer = KaimoPromise.deferred = function () {
     let dfd = {};
     dfd.promise = new KaimoPromise((resolve, reject) => {
