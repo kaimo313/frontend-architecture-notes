@@ -1,14 +1,14 @@
-// 1、类数组：长的向数组
+// 1、类数组：长的像数组
 
 const likeArray = {
     0: "a",
     1: "b",
     2: "c",
     3: "d",
-    length: 4,
+    length: 4
 };
 
-// 拓展运算符：原理就是遍历这里对象 将结果放到数组中，这个数组必须有个遍历器。（[...new Set()]）
+// 拓展运算符：原理就是遍历这个对象 将结果放到数组中，这个数组必须有个遍历器。（[...new Set()]）
 // [...likeArray]; // likeArray是类数组并且没有遍历器不能迭代遍历，执行会报错：object is not iterable
 
 // Array.from(likeArray); // 可以将类数组转为数组：[ 'a', 'b', 'c', 'd' ]
@@ -23,9 +23,9 @@ const likeArray = {
 //             return {
 //                 value: this[i],
 //                 // done 为 true 表示完成
-//                 done: i++ === this.length,
+//                 done: i++ === this.length
 //             };
-//         },
+//         }
 //     };
 // };
 // console.log([...likeArray]);
@@ -33,7 +33,6 @@ const likeArray = {
 // 2、使用 generator 改造 likeArray 的迭代器
 // * 表示该函数是 generator 函数，generator 生成器生成的叫遍历器(迭代器)
 // likeArray[Symbol.iterator] = function* () {
-//     // 返回一个遍历器对象，需要有一个 next 方法，不停的调用
 //     let i = 0;
 //     while (i !== this.length) {
 //         // yield 表示产出，固定语法，配合着 * 来使用
@@ -45,7 +44,7 @@ const likeArray = {
 // 3、generator 的使用
 
 // 普通函数默认会从头到尾执行没有暂停的功能
-// generator 函数是 es6 提供的语法，如果碰到 yield 就会暂停执行（redux-sage、koa1 中有用到）
+// generator 函数是 es6 提供的语法，如果碰到 yield 就会暂停执行（redux-saga、koa1 中有用到）
 
 // function* read() {
 //     yield 1;
