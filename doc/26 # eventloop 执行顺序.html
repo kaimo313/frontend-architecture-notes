@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>eventloop 执行顺序</title>
+    </head>
+    <body>
+        <div id="button">按钮</div>
+        <script>
+            // es6 内部是一个微任务
+            Promise.resolve().then(() => {
+                console.log("Promise1");
+                setTimeout(() => {
+                    console.log("setTimeout2");
+                }, 0);
+            });
+            setTimeout(() => {
+                console.log("setTimeout1");
+                Promise.resolve().then(() => {
+                    console.log("Promise2");
+                });
+            }, 0);
+            // Promise1 setTimeout1 Promise2 setTimeout2
+
+            // 事件点击跟直接触发 addEventListener 是宏任务
+            button.addEventListener("click", () => {
+                console.log("Listener1");
+                Promise.resolve().then(() => {
+                    console.log("Promise1");
+                });
+            });
+            button.addEventListener("click", () => {
+                console.log("Listener2");
+                Promise.resolve().then(() => {
+                    console.log("Promise2");
+                });
+            });
+            // 直接点击按钮：会有两个宏任务进入队列，然后一次根据js执行流程去走，输出 Listener1 Promise1 Listener2 Promise2
+            // 如果直接执行 button.click()，相当通两个同时执行，会输出 Listener1 Listener2 Promise1 Promise2
+
+            async function async1() {
+                console.log("async1 start");
+                // 浏览器识别async+await，await 后面跟的是 promise 的话默认就会直接调用这个 promise 的 then 方法
+                // async2 会立即执行，相当于async2().then(() => {console.log("async1 end")})
+                await async2();
+                console.log("async1 end");
+            }
+            async function async2() {
+                console.log("async2");
+            }
+            console.log("script start");
+            setTimeout(() => {
+                console.log("setTimeout");
+            }, 0);
+            async1();
+            new Promise((resolve, reject) => {
+                console.log("promise1");
+                resolve();
+            }).then(function () {
+                console.log("promise2");
+            });
+            console.log("script end");
+
+            // 默认执行： script start、async1 start、async2、promise1、script end
+            // 微任务：[async1 end, promise2]
+            // 宏任务：[setTimeout]
+        </script>
+    </body>
+</html>
