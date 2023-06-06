@@ -1,0 +1,26 @@
+{
+  "name": "frontend-architecture-notes",
+  "version": "1.0.0",
+  "description": "前端架构学习笔记",
+  "main": ".prettierrc.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaimo313/frontend-architecture-notes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaimo313/frontend-architecture-notes/issues"
+  },
+  "homepage": "https://github.com/kaimo313/frontend-architecture-notes#readme",
+  "dependencies": {
+    "commander": "^10.0.1"
+  }
+}
