@@ -7,6 +7,10 @@
 // global 跟 window 一样，可以循环引用
 // console.log(global.global.global);
 
+// 浏览器以前的方法还是可以使用的，只是默认没有被枚举出来，比如：encodeURI
+// 可以打印一下 global 的隐藏属性
+// console.dir(global, { showHidden: true });
+
 // ### process 进程（重要）
 // process 默认取值就会向 global 中查找
 // 不能写成 this.process：node中有一个模块化系统，是以文件为单位，每个文件都是一个模块，模块中的 this 被更改成 {}
