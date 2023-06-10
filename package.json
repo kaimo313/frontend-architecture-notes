@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/kaimo313/frontend-architecture-notes#readme",
   "dependencies": {
-    "commander": "^10.0.1"
+    "commander": "^10.0.1",
+    "ejs": "^3.1.9"
   }
 }
