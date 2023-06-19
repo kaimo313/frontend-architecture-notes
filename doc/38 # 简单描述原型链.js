@@ -20,12 +20,37 @@ const EventEmitter = require("events");
 
 // 常用的继承策略：继承父类的原型链
 
+// function Man() {}
+
+// let man = new Man();
+
+// console.log(man.__proto__ === Man.prototype); // true
+// console.log(Man.prototype.__proto__ === Object.prototype); // true
+// console.log(Object.prototype.__proto__); // null 对象的原型的 __proto__ 指向的是 null
+
+// 继承父类的原型方法
+// function Man() {}
+// Man.prototype.__proto__ = EventEmitter.prototype; // 最早
+// Man.prototype = Object.create(EventEmitter.prototype); // es5 版本
+// Object.create 方式的原理
+// function create(parentPrototype) {
+//     function Fn() {}
+//     Fn.prototype = parentPrototype;
+//     return new Fn();
+// }
+// Object.setPrototypeOf(Man.prototype, EventEmitter.prototype); // es6 版本
+// extends 语法：class Man extends EventEmitter
+
+// let man = new Man();
+// console.log(man.on);
+
+// 使用 util 模块
+const util = require("util");
 function Man() {}
 
+util.inherits(Man, EventEmitter);
+
 let man = new Man();
+console.log(man.on);
 
-console.log(man.__proto__ === Man.prototype); // true
-console.log(Man.prototype.__proto__ === Object.prototype); // true
-console.log(Object.prototype.__proto__); // null 对象的原型的 __proto__ 指向的是 null
-
-// Man.prototype.__proto__ = EventEmitter.prototype;
+// Util.inherits 的底层实现
