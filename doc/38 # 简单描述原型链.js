@@ -1,6 +1,6 @@
 // 基于事件驱动，node 中自己实现了一个发布订阅
 
-const EventEmitter = require("events");
+// const EventEmitter = require("events");
 
 // const event = new EventEmitter();
 // console.log(event.__proto__);
@@ -29,7 +29,6 @@ const EventEmitter = require("events");
 // console.log(Object.prototype.__proto__); // null 对象的原型的 __proto__ 指向的是 null
 
 // 继承父类的原型方法
-// function Man() {}
 // Man.prototype.__proto__ = EventEmitter.prototype; // 最早
 // Man.prototype = Object.create(EventEmitter.prototype); // es5 版本
 // Object.create 方式的原理
@@ -45,12 +44,17 @@ const EventEmitter = require("events");
 // console.log(man.on);
 
 // 使用 util 模块的 inherits 实现继承
-const util = require("util");
-function Man() {}
+// const EventEmitter = require("events");
+// const util = require("util");
+// function Man() {}
 
-util.inherits(Man, EventEmitter);
+// util.inherits(Man, EventEmitter);
 
-let man = new Man();
-console.log(man.on);
+// let man = new Man();
+// console.log(man.on);
 
 // util.inherits 的底层实现
+
+// function inherits(ctor, superCtor) {
+//     Object.setPrototypeOf(ctor.prototype, superCtor.prototype);
+// }
