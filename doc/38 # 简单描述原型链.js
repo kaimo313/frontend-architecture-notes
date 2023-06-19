@@ -44,7 +44,7 @@ const EventEmitter = require("events");
 // let man = new Man();
 // console.log(man.on);
 
-// 使用 util 模块
+// 使用 util 模块的 inherits 实现继承
 const util = require("util");
 function Man() {}
 
@@ -53,4 +53,4 @@ util.inherits(Man, EventEmitter);
 let man = new Man();
 console.log(man.on);
 
-// Util.inherits 的底层实现
+// util.inherits 的底层实现
