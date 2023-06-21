@@ -1,5 +1,5 @@
 function EventEmitter() {
-    this._events = {};
+    this._events = {}; // 默认给 EventEmitter 准备的
 }
 
 // 订阅

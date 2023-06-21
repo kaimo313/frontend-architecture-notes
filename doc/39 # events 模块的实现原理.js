@@ -17,31 +17,33 @@ let man = new Man();
 const sleep = (name) => console.log(name, "睡");
 const eat = (name) => console.log(name, "吃");
 
-// newListener 固定写法
-man.on("newListener", (type) => {
-    console.log("newListener---->", type);
-    if (type === "唱跳rap篮球") {
-        // 在当前同步代码执行完毕后触发事件
-        process.nextTick(() => {
-            man.emit(type, "小坤");
-        });
-    }
-});
+// newListener 固定写法，每次绑定都会触发，可以用于判断监听了哪些事件
+// [https://nodejs.org/dist/latest-v18.x/docs/api/events.html#event-newlistener](https://nodejs.org/dist/latest-v18.x/docs/api/events.html#event-newlistener)
+// man.on("newListener", (type) => {
+//     console.log("newListener---->", type);
+//     if (type === "唱跳rap篮球") {
+//         // 在当前同步代码执行完毕后触发事件
+//         process.nextTick(() => {
+//             man.emit(type, "小坤");
+//         });
+//     }
+// });
 
-// newListener 测试
-man.on("唱跳rap篮球", sleep);
-man.once("唱跳rap篮球", eat);
+// // newListener 测试
+// man.on("唱跳rap篮球", sleep);
+// man.once("唱跳rap篮球", eat);
 
-// on 测试
-man.on("唱跳rap篮球", sleep);
-man.on("唱跳rap篮球", eat);
-man.emit("唱跳rap篮球", "小坤");
+// // on 测试
+// man.on("唱跳rap篮球", sleep);
+// man.on("唱跳rap篮球", eat);
+// man.emit("唱跳rap篮球", "小坤");
 
-// off 测试
-man.off("唱跳rap篮球", sleep);
-man.emit("唱跳rap篮球", "小坤");
+// // off 测试
+// man.on("唱跳rap篮球", sleep);
+// man.off("唱跳rap篮球", sleep);
+// man.emit("唱跳rap篮球", "小坤");
 
-// once 测试
-man.once("唱跳rap篮球", eat);
-man.emit("唱跳rap篮球", "小坤");
-man.emit("唱跳rap篮球", "小坤");
+// // once 测试
+// man.once("唱跳rap篮球", eat);
+// man.emit("唱跳rap篮球", "小坤");
+// man.emit("唱跳rap篮球", "小坤");
