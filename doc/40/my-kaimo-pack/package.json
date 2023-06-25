@@ -7,9 +7,24 @@
         "kaimo": "./bin/kaimo.js"
     },
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "kaimo": "node ./bin/kaimo.js",
+        "mime": "mime"
     },
     "keywords": [],
     "author": "",
-    "license": "ISC"
+    "license": "ISC",
+    "devDependencies": {
+        "webpack": "^5.88.0"
+    },
+    "dependencies": {
+        "jquery": "^3.7.0",
+        "vue": "^3.3.4"
+    },
+    "peerDependencies": {
+        "jquery": "^3.0.0"
+    },
+    "bundleDependencies": [
+        "jquery"
+    ],
+    "optionalDependencies": {}
 }
