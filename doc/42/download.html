@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>前端实现下载功能</title>
+    </head>
+    <body>
+        <script>
+            let str = "<div><h1>凯小默的博客</h1><span>专注前端领域开发</span></div>";
+            // 包装后的文件类型不能直接修改
+            const blob = new Blob([str], {
+                type: "text/html"
+            });
+            const a = document.createElement("a");
+            a.setAttribute("download", "index.html");
+            a.href = URL.createObjectURL(blob);
+            a.click();
+        </script>
+    </body>
+</html>

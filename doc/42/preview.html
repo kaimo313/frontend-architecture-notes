@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>前端实现预览功能</title>
+    </head>
+    <body>
+        <input type="file" id="file" />
+        <script>
+            file.addEventListener("change", (e) => {
+                console.log(e.target.files);
+                // 二进制文件类型
+                let file = e.target.files[0];
+
+                // 方式一：同步读取
+                let img = document.createElement("img");
+                let url = URL.createObjectURL(file);
+                img.src = url;
+                document.body.appendChild(img);
+                // 销毁使用
+                // URL.revokeObjectURL(url);
+
+                // 方式二：异步读取内容
+                let fileReader = new FileReader();
+                fileReader.onload = function () {
+                    console.log(fileReader.result);
+                    let img = document.createElement("img");
+                    img.src = fileReader.result;
+                    document.body.appendChild(img);
+                };
+                fileReader.readAsDataURL(file);
+            });
+        </script>
+    </body>
+</html>
