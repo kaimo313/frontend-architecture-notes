@@ -12,7 +12,7 @@
             "skipFiles": [
                 // "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\doc\\43\\buffer.js"
+            "program": "${workspaceFolder}\\doc\\46\\readStream.js"
         }
     ]
 }
