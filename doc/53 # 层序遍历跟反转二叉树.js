@@ -87,14 +87,55 @@ class BST {
         };
         traversal(this.root);
     }
-    // 反转二叉树
-    invert(node) {
+    // 层序遍历
+    levelOrderTraversal(visitor) {
+        if (this.root === null || visitor == null) return;
+        // 根节点放入队列
+        let stack = [this.root];
+        let index = 0;
+        let currentNode = null;
+        while ((currentNode = stack[index++])) {
+            visitor.visit(currentNode);
+            if (currentNode.left) {
+                stack.push(currentNode.left);
+            }
+            if (currentNode.right) {
+                stack.push(currentNode.right);
+            }
+        }
+        stack = null;
+    }
+    // 反转二叉树：用栈实现
+    invertTree() {
+        if (this.root === null) return;
+        // 根节点放入队列
+        let stack = [this.root];
+        let index = 0;
+        let currentNode = null;
+        while ((currentNode = stack[index++])) {
+            // 核心三行就是反转逻辑
+            let temp = currentNode.left;
+            currentNode.left = currentNode.right;
+            currentNode.right = temp;
+
+            if (currentNode.left) {
+                stack.push(currentNode.left);
+            }
+            if (currentNode.right) {
+                stack.push(currentNode.right);
+            }
+        }
+        stack = null;
+        return this.root;
+    }
+    // 反转二叉树：递归
+    invertTree2(node) {
         if (node !== null) {
             let temp = node.left;
             node.left = node.right;
             node.right = temp;
-            this.invert(node.left);
-            this.invert(node.right);
+            this.invertTree(node.left);
+            this.invertTree(node.right);
         }
         return node;
     }
@@ -107,4 +148,11 @@ let arr = [10, 8, 19, 6, 15, 22, 20];
 arr.forEach((element) => {
     bst.add(element);
 });
-console.dir(bst.invert(bst.root), { depth: 100 });
+console.log(
+    bst.levelOrderTraversal({
+        visit(node) {
+            console.log("visitor.visit---->", node.element);
+        },
+    })
+);
+console.dir(bst.invertTree(bst.root), { depth: 100 });
