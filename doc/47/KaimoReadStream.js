@@ -9,8 +9,8 @@ class KaimoReadStream extends EventEmitter {
         this.mode = opts.mode || 0o666;
         this.autoClose = opts.autoClose || true;
         this.start = opts.start || 0;
-        this.end = opts.end || 0o666;
-        // 读取的数量默认是 64k
+        this.end = opts.end;
+        // 读取的数量默认是 64k 如果文件大于 64k 就可以采用流的方式
         this.highWaterMark = opts.highWaterMark || 64 * 1024;
         // 记录读取的偏移量
         this.pos = this.start;
