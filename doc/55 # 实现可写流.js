@@ -1,5 +1,4 @@
 // 写入10个数，只占用一个字节的内存
-const fs = require("fs");
 const path = require("path");
 
 const KaimoWriteStream = require("./55/KaimoWriteStream");

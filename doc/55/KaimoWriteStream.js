@@ -98,7 +98,7 @@ class KaimoWriteStream extends EventEmitter {
     clearBuffer() {
         let data = this.cache.poll();
         if (data) {
-            // 需要缓存
+            // 需要清空缓存
             let { chunk, encoding, cb } = data;
             this._write(chunk, encoding, () => {
                 cb();
