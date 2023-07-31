@@ -1,0 +1,17 @@
+{
+    "name": "kaimo-http-server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "keywords": [
+        "http-server"
+    ],
+    "author": "kaimo",
+    "license": "MIT",
+    "bin": {
+        "kaimo-http-server": "bin/www.js"
+    },
+    "dependencies": {
+        "commander": "^5.1.0"
+    }
+}
