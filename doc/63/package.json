@@ -12,6 +12,10 @@
         "kaimo-http-server": "bin/www.js"
     },
     "dependencies": {
-        "commander": "^5.1.0"
+        "chalk": "^4.1.0",
+        "commander": "^5.1.0",
+        "debug": "^4.1.1",
+        "ejs": "^3.1.3",
+        "mime": "^2.4.6"
     }
 }

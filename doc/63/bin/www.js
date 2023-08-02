@@ -3,6 +3,7 @@
 const program = require("commander");
 const { version } = require("../package.json");
 const config = require("./config.js");
+const Server = require("../src/server.js");
 
 program.name("kaimo-http-server");
 program.usage("[args]");
@@ -25,16 +26,15 @@ program.on("--help", () => {
 
 // 解析用户的参数
 let parseObj = program.parse(process.argv);
-console.log("parseObj---->", parseObj);
 
 let keys = Object.keys(config);
-console.log(keys);
 
 // 最终用户拿到的数据
 let resultConfig = {};
 keys.forEach((key) => {
-    console.log(parseObj[key]);
     resultConfig[key] = parseObj[key] || config[key].default;
 });
 
-console.log(resultConfig);
+// 将拿到的配置数据开启一个 server
+let server = new Server(resultConfig);
+server.start();
