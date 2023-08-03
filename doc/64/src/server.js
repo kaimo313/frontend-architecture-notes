@@ -61,14 +61,10 @@ class Server {
         try {
             let parseObj = dirs.map((item) => ({
                 dir: item,
-                href: path.join(pathname, item), // url路径拼接自己的路径
+                href: path.join(pathname, item) // url路径拼接自己的路径
             }));
             // 渲染列表：这里采用异步渲染
-            let templateStr = await ejs.render(
-                this.template,
-                { dirs: parseObj },
-                { async: true }
-            );
+            let templateStr = await ejs.render(this.template, { dirs: parseObj }, { async: true });
             console.log(templateStr, "-------------templateStr----------");
             res.setHeader("Content-type", "text/html;charset=utf-8");
             res.end(templateStr);
@@ -79,10 +75,7 @@ class Server {
     // 读取文件返回
     sendFile(req, res, filePath, statObj) {
         // 设置类型
-        res.setHeader(
-            "Content-type",
-            mime.getType(filePath) + ";charset=utf-8"
-        );
+        res.setHeader("Content-type", mime.getType(filePath) + ";charset=utf-8");
         // 读取文件进行响应
         createReadStream(filePath).pipe(res);
     }
@@ -95,13 +88,7 @@ class Server {
     start() {
         const server = http.createServer(this.handleRequest.bind(this));
         server.listen(this.port, this.port, () => {
-            console.log(
-                chalk.yellow(
-                    `Starting up kaimo-http-server, serving ./${this.directory
-                        .split("\\")
-                        .pop()}\r\n`
-                )
-            );
+            console.log(chalk.yellow(`Starting up kaimo-http-server, serving ./${this.directory.split("\\").pop()}\r\n`));
             console.log(chalk.green(`       http://${this.host}:${this.port}`));
         });
     }
