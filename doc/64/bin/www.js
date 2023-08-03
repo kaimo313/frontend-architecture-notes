@@ -36,5 +36,6 @@ keys.forEach((key) => {
 });
 
 // 将拿到的配置数据开启一个 server
+console.log("resultConfig---->", resultConfig);
 let server = new Server(resultConfig);
 server.start();

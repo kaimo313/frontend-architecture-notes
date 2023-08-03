@@ -5,13 +5,25 @@
 需要用到的核心模块
 
 ```js
-
+const http = require("http");
+const path = require("path");
+const url = require("url");
+const fs = require("fs").promises;
+const { createReadStream, createWriteStream, readFileSync } = require("fs");
 ```
 
-需要用到的第三方模块
+需要用到的第三方模块：
+
+- [ejs](https://www.npmjs.com/package/ejs) 用来进行模板渲染
+- [mime](https://www.npmjs.com/package/mime) 用来根据文件扩展名获取 MIME type, 也可以根据 MIME type 获取扩展名。
+- [chalk](https://www.npmjs.com/package/chalk) 用来控制台输出着色
+- [debug](https://www.npmjs.com/package/debug) 可以根据环境变量来进行打印
 
 ```js
-
+const ejs = require("ejs"); // 服务端读取目录进行渲染
+const mime = require("mime");
+const chalk = require("chalk");
+const debug = require("debug")("server");
 ```
 
 ## 安装依赖

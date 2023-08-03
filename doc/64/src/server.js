@@ -87,7 +87,7 @@ class Server {
     }
     start() {
         const server = http.createServer(this.handleRequest.bind(this));
-        server.listen(this.port, this.port, () => {
+        server.listen(this.port, this.host, () => {
             console.log(chalk.yellow(`Starting up kaimo-http-server, serving ./${this.directory.split("\\").pop()}\r\n`));
             console.log(chalk.green(`       http://${this.host}:${this.port}`));
         });
