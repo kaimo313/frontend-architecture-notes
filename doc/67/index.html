@@ -1,38 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>凯小默测试对象的处理</title>
-    </head>
 
-    <body>
-        <form action="http://localhost:3000/login" method="POST" enctype="application/x-www-form-urlencoded">
-            <input type="text" name="username" />
-            <input type="text" name="password" />
-            <button type="submit">提交</button>
-        </form>
-        <hr />
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>凯小默测试对象的处理</title>
+</head>
 
-        <button id="btn">注册提交数据</button>
-        <script>
-            // 默认如果域名，端口号，协议不一致会有跨域问题
-            btn.addEventListener("click", () => {
-                // ajax 4部曲 1.创建 xhr 对象 2.开启请求 3.发送请求 4.监听状态变化
-                const xhr = new XMLHttpRequest();
-                xhr.open("POST", "http://localhost:3000/regist", true); // 异步提交
-                xhr.setRequestHeader("Content-Type", "application/json");
-                xhr.send(
-                    JSON.stringify({
-                        name: "kaimo",
-                        age: 313
-                    })
-                );
-                // xhr.readyState == 4 && xhr.status == 200
-                xhr.onload = function () {
-                    console.log(xhr.response);
-                };
-            });
-        </script>
-    </body>
+<body>
+    <form action="http://localhost:3000/login" method="POST" enctype="application/x-www-form-urlencoded">
+        <input type="text" name="username" />
+        <input type="text" name="password" />
+        <button type="submit">提交</button>
+    </form>
+    <hr />
+
+    <button id="btn">注册提交数据</button>
+    <script>
+        // 默认如果域名，端口号，协议不一致会有跨域问题
+        btn.addEventListener("click", () => {
+            // ajax 4部曲 1.创建 xhr 对象 2.开启请求 3.发送请求 4.监听状态变化
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://localhost:3000/regist", true); // 异步提交
+            xhr.setRequestHeader("Content-Type", "application/json");
+            // 浏览器自动将相应的结果转化为对象
+            xhr.responseType = "json";
+            xhr.send(
+                JSON.stringify({
+                    name: "kaimo",
+                    age: 313
+                })
+            );
+            // xhr.readyState == 4 && xhr.status == 200
+            xhr.onload = function () {
+                console.log(xhr.response);
+            };
+        });
+    </script>
+</body>
+
 </html>
