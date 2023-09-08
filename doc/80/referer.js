@@ -1,0 +1,41 @@
+const fs = require("fs");
+const path = require("path");
+const url = require("url");
+const http = require("http");
+
+http.createServer((req, res) => {
+    const { pathname } = url.parse(req.url, true);
+    const absPath = path.join(__dirname, pathname);
+
+    fs.stat(absPath, (err, statObj) => {
+        if (err) return res.end("Not Found");
+        console.log("absPath----->", absPath);
+        console.log("statObj----->", statObj);
+        if (statObj) {
+            console.log(statObj.isDirectory());
+            console.log(statObj.isFile());
+            if (statObj.isFile()) {
+                // 只对图片进行防盗链，如果请求路径是 .jpg 结尾的需要判断引用的来源
+                if (/\.jpg/.test(absPath)) {
+                    let referer = req.headers["referer"] || req.headers["referrer"];
+                    if (referer) {
+                        // 拿 host 跟 referer 比较
+                        let host = req.headers.host;
+                        refererHost = url.parse(referer).host;
+                        console.log("host----->", host);
+                        console.log("refererHost----->", refererHost);
+                        if (host !== refererHost) {
+                            fs.createReadStream(path.resolve(__dirname, "referer.jpg")).pipe(res);
+                            return;
+                        }
+                    }
+                }
+                fs.createReadStream(absPath).pipe(res);
+            } else {
+                res.end("Not Found");
+            }
+        } else {
+            res.end("Not Found");
+        }
+    });
+}).listen(3000);
