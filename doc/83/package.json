@@ -1,0 +1,17 @@
+{
+  "name": "83",
+  "version": "1.0.0",
+  "description": "",
+  "main": "static.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.14.2",
+    "koa-bodyparser": "^4.4.1",
+    "koa-static": "^5.0.0"
+  }
+}
