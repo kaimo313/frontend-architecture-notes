@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <button id="btn">点击跳转</button>
+        <script>
+            document.getElementById("btn").addEventListener("click", () => {
+                window.open("https://www.baidu.com/");
+            });
+            window.addEventListener("message", function (e) {
+                console.log("kaimo-666", e);
+            });
+        </script>
+    </body>
+</html>
