@@ -1,0 +1,18 @@
+{
+  "name": "97",
+  "version": "1.0.0",
+  "description": "",
+  "main": "koa-cookie.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@koa/router": "^12.0.0",
+    "koa": "^2.14.2",
+    "koa-session": "^6.4.0",
+    "uuid": "^9.0.1"
+  }
+}
