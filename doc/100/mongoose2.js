@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 
 // 1、连接 mongodb
-let conn = mongoose.createConnection("mongodb://kaimo313:kaimo313@localhost:27017/user", {});
+let conn = mongoose.createConnection("mongodb://kaimo313:kaimo313@localhost:27017/user", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 conn.on("connected", () => {
     console.log("链接成功");
 });
@@ -18,7 +21,8 @@ let StudentSchema = new mongoose.Schema(
         birthday: {
             type: Date,
             default: Date.now
-        }
+        },
+        hobby: [String]
     },
     {
         collection: "Student" // 设置固定的名字
@@ -53,5 +57,25 @@ let Student = conn.model("Student", StudentSchema);
     // where 基本不用，性能差 （{$where: "age>2"}）
     // 操作符：lt: 小于 gt：大于 lte：小于等于 lgt：大于等于 inc：递增
     let r3 = await Student.updateOne({ age: { $gt: 2 } }, { $inc: { age: 10 } });
-    console.log("修改操作----->", r3);
+    console.log("修改操作--r3--->", r3);
+    // 加个字段，新增 set
+    let r4 = await Student.updateOne({ username: /kaimo1/ }, { $set: { password: "123456" } });
+    console.log("修改操作--r4--->", r4);
+    // 数组新增用 push，不重复添加用 addToSet
+    let r5 = await Student.updateOne({ username: /kaimo1/ }, { $push: { hobby: ["睡觉1", "睡觉2"] } });
+    console.log("修改操作--r5--->", r5);
+    // 多条件（or）删除（pop）数组第一个
+    let r6 = await Student.updateOne({ $or: [{ username: /kaimo1/ }, { age: 1 }] }, { $pop: { hobby: -1 } });
+    console.log("修改操作--r6--->", r6);
+
+    // 4) 删除
+    // Student.deleteOne(); Student.deleteMany();
+
+    // 5) 分页查询
+    let limit = 2; // 每页2条
+    let currentPage = 2; // 当前是第2页
+    let skip = (currentPage - 1) * limit;
+    // find 返回的是一个游标，并不是一个结果；查询 -> 排序 -> 跳过 -> 限制
+    let r7 = await Student.find({}).limit(limit).skip(skip).sort({ age: -1 });
+    console.log("分页查询--r7--->", r7);
 })();

@@ -9,4 +9,3 @@ elegant mongodb object modeling for node.js
 ```bash
 npm i mongoose
 ```
-

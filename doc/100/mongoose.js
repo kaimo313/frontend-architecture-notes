@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 
 // 1、连接 mongodb
-let conn = mongoose.createConnection("mongodb://kaimo313:kaimo313@localhost:27017/user", {});
+let conn = mongoose.createConnection("mongodb://kaimo313:kaimo313@localhost:27017/user", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 conn.on("connected", () => {
     console.log("链接成功");
 });
